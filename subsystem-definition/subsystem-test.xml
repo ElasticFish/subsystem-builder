@@ -1,0 +1,7 @@
+<subsystems name="Test" description="It is only used to to test">
+
+    <subsystem name="test1" description="test1">
+        <module name="org.glassfish.main.web.core" />
+    </subsystem>
+
+</subsystems>
