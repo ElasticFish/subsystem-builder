@@ -37,7 +37,7 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package org.glassfish.featureManage.featureAdd;
+package org.glassfish.subsystem.command;
 
 import org.glassfish.subsystem.manager.core.SubsystemManagerService;
 
@@ -46,13 +46,13 @@ import org.osgi.framework.BundleReference;
 import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.util.tracker.ServiceTracker;
 
-public class Util {
+public class CommandUtil {
 
 	public static final long OBRHADNDLESERVICE_TIMEOUT = 1; // in ms
 	
 	public static SubsystemManagerService getObrHandlerService()
 			throws InvalidSyntaxException, InterruptedException {
-		BundleContext bc = getBundleContext(Util.class);
+		BundleContext bc = getBundleContext(CommandUtil.class);
 
 		ServiceTracker st = null;
 
@@ -62,7 +62,7 @@ public class Util {
 		st.open();
 
 		SubsystemManagerService service = (SubsystemManagerService) st
-				.waitForService(Util.OBRHADNDLESERVICE_TIMEOUT);
+				.waitForService(CommandUtil.OBRHADNDLESERVICE_TIMEOUT);
 		return service;
 	}
 

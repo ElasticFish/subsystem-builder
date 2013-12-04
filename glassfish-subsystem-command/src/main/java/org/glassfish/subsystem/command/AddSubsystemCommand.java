@@ -37,7 +37,7 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package org.glassfish.featureManage.featureAdd;
+package org.glassfish.subsystem.command;
 
 import com.sun.enterprise.config.serverbeans.*;
 
@@ -66,7 +66,7 @@ import org.glassfish.subsystem.manager.core.SubsystemManagerService;
         path="feature-add", 
         description="Feature Add")
 })
-public class FeatureAdd implements AdminCommand {
+public class AddSubsystemCommand implements AdminCommand {
 
     @Param(primary=true, optional=true)
     File path = null;
@@ -74,7 +74,7 @@ public class FeatureAdd implements AdminCommand {
     @Override
     public void execute(AdminCommandContext context) {
         try {
-        	SubsystemManagerService service = Util.getObrHandlerService();
+        	SubsystemManagerService service = CommandUtil.getObrHandlerService();
             service.deploySubsystems(path.getCanonicalPath());
         } catch (Exception e) {
             e.printStackTrace();
