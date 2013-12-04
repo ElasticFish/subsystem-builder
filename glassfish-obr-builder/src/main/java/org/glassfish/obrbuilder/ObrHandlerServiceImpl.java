@@ -83,6 +83,7 @@ import org.apache.felix.bundlerepository.impl.RepositoryImpl;
 import org.apache.felix.bundlerepository.impl.RequirementImpl;
 import org.apache.felix.bundlerepository.impl.ResourceImpl;
 import org.apache.felix.utils.log.Logger;
+import org.glassfish.obrbuilder.subsystem.Subsystems;
 import org.jvnet.hk2.annotations.Optional;
 import org.jvnet.hk2.annotations.Service;
 import org.osgi.framework.Bundle;
@@ -883,5 +884,11 @@ class ObrHandlerServiceImpl implements ObrHandlerService {
 
 	private Repository[] getRepositories() {
 		return repositories.toArray(new Repository[repositories.size()]);
+	}
+
+	@Override
+	public Subsystems deploySubsystems(String subSystemPath) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

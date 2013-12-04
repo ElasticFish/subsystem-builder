@@ -39,9 +39,11 @@
  */
 package org.glassfish.obrbuilder;
 
+import java.io.IOException;
 import java.net.URI;
 
 import org.apache.felix.bundlerepository.RepositoryAdmin;
+import org.glassfish.obrbuilder.subsystem.Subsystems;
 
 /**
  * 
@@ -53,4 +55,6 @@ public interface ObrHandlerService {
 	public RepositoryAdmin getRepositoryAdmin();
 
 	public void addRepository(URI obrUri) throws Exception;
+	
+	public Subsystems deploySubsystems(String subSystemPath) throws IOException;
 }
