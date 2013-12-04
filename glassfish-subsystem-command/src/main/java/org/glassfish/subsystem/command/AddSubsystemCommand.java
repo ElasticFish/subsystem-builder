@@ -56,15 +56,15 @@ import org.glassfish.subsystem.manager.core.SubsystemManagerService;
  * @author Jeremy Lv
  * @author Tang Yong
  */
-@Service(name = "feature-add")
-@I18n("feature.add")
+@Service(name = "add-subsystem")
+@I18n("add.subsystem")
 @PerLookup
 @ExecuteOn({RuntimeType.DAS})
 @RestEndpoints({
     @RestEndpoint(configBean=Domain.class,
         opType=RestEndpoint.OpType.POST, 
-        path="feature-add", 
-        description="Feature Add")
+        path="add-subsystem", 
+        description="Subsystem Add")
 })
 public class AddSubsystemCommand implements AdminCommand {
 
@@ -80,5 +80,4 @@ public class AddSubsystemCommand implements AdminCommand {
             e.printStackTrace();
         }
     }
-
 }
