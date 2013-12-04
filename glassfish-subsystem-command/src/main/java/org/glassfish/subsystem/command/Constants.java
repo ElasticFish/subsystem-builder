@@ -37,63 +37,25 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
+
 package org.glassfish.subsystem.command;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.glassfish.subsystem.manager.core.SubsystemManagerService;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.BundleReference;
-import org.osgi.framework.InvalidSyntaxException;
-import org.osgi.util.tracker.ServiceTracker;
-
-public class CommandUtil {
-
-	public static final long OBRHADNDLESERVICE_TIMEOUT = 1; // in ms
-	
-	public static SubsystemManagerService getObrHandlerService()
-			throws InvalidSyntaxException, InterruptedException {
-		BundleContext bc = getBundleContext(CommandUtil.class);
-
-		ServiceTracker st = null;
-
-		st = new ServiceTracker(bc, bc.createFilter("(objectClass="
-				+ SubsystemManagerService.class.getName() + ")"), null);
-
-		st.open();
-
-		SubsystemManagerService service = (SubsystemManagerService) st
-				.waitForService(CommandUtil.OBRHADNDLESERVICE_TIMEOUT);
-		return service;
-	}
-
-	public static BundleContext getBundleContext(Class<?> clazz) {
-		BundleContext bc = null;
-		try {
-			bc = BundleReference.class.cast(clazz.getClassLoader()).getBundle()
-					.getBundleContext();
-		} catch (ClassCastException cce) {
-			throw cce;
-		}
-
-		return bc;
-	}
-	
-	public static String getDefaultSubsystemDef(){
-		File gfHome;
-		String defaultSubsystemDef = null;
-		String property = System.getProperties().getProperty(Constants.GLASSFISH_INSTALL_ROOT_PROP);
-        if (property != null && !property.isEmpty()) {
-            gfHome =  new File(property);
-            
-            try {
-				defaultSubsystemDef = new File(gfHome, Constants.TEST_SUBSYSTEM_DEFINITION).getCanonicalPath();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-        }
-        
-        return defaultSubsystemDef;
-	}
+/**
+ * @author TangYong(tangyong@cn.fujitsu.com)
+ */
+public final class Constants {
+    /**
+     * Property name to specify installation root of GlassFish.
+     */
+    static final String GLASSFISH_INSTALL_ROOT_PROP = "com.sun.aas.installRoot";
+    
+    /**
+     * default subsystem definition file for GF.
+     */
+    public static final String GF_SUBSYSTEM_DEFINITION = "config/subsystem-gf.xml";
+    
+    /**
+     * subsystem definition file used for testing.
+     */
+    public static final String TEST_SUBSYSTEM_DEFINITION = "config/subsystem-test.xml";   
 }

@@ -52,32 +52,43 @@ import org.jvnet.hk2.annotations.Service;
 import org.glassfish.subsystem.manager.core.SubsystemManagerService;
 
 /**
- *
+ * 
  * @author Jeremy Lv
  * @author Tang Yong
  */
 @Service(name = "add-subsystem")
 @I18n("add.subsystem")
 @PerLookup
-@ExecuteOn({RuntimeType.DAS})
-@RestEndpoints({
-    @RestEndpoint(configBean=Domain.class,
-        opType=RestEndpoint.OpType.POST, 
-        path="add-subsystem", 
-        description="Subsystem Add")
-})
+@ExecuteOn({ RuntimeType.DAS })
+@RestEndpoints({ @RestEndpoint(configBean = Domain.class, opType = RestEndpoint.OpType.POST, path = "add-subsystem", description = "Subsystem Add") })
 public class AddSubsystemCommand implements AdminCommand {
 
-    @Param(primary=true, optional=true)
-    File path = null;
-    
-    @Override
-    public void execute(AdminCommandContext context) {
-        try {
-        	SubsystemManagerService service = CommandUtil.getObrHandlerService();
-            service.deploySubsystems(path.getCanonicalPath());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	@Param(primary = true, optional = true)
+	File path = null;
+
+	@Override
+	public void execute(AdminCommandContext context) {
+		try {
+			SubsystemManagerService service = CommandUtil
+					.getObrHandlerService();
+
+			if (path == null) {
+				// Defaultly, this will add system-wide subsystem for GlassFish
+				// itself
+				// then, we will search subsystem definition file in
+				// ${com.sun.aas.installRootURI}/config/
+				String defaultPath = CommandUtil.getDefaultSubsystemDef();
+				if (defaultPath == null) {
+					throw new RuntimeException(
+							"default subsystem def file for GF is not set");
+				}
+
+				service.deploySubsystems(defaultPath);
+			} else {
+				service.deploySubsystems(path.getCanonicalPath());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
