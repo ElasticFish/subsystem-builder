@@ -34,9 +34,9 @@
 		<version>4.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>glassfish-obr-builder</artifactId>
+	<artifactId>glassfish-subsystem-manager</artifactId>
 	<version>4.0.1-SNAPSHOT</version>
-	<name>Builds OBR from a set of OSGi bundles</name>
+	<name>GlassFish Subsystem Manager</name>
 	<packaging>glassfish-jar</packaging>
 
 	<dependencies>
