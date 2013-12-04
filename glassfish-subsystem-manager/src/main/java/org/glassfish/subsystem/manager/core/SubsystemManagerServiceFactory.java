@@ -37,65 +37,24 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-
 package org.glassfish.subsystem.manager.core;
 
-import java.net.URI;
-import java.util.logging.Level;
-
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.ServiceFactory;
 import org.osgi.framework.ServiceRegistration;
-
-import static org.glassfish.subsystem.manager.core.Logger.logger;
 
 /**
  * @author TangYong(tangyong@cn.fujitsu.com)
  */
-public class SubsystemManagerActivator implements BundleActivator {
+public class SubsystemManagerServiceFactory implements ServiceFactory {
 
-	private BundleContext bctx;
-	ServiceRegistration registration = null;
-
-	public void start(BundleContext context) throws Exception {
-		this.bctx = context;
-
-		String gfModuleRepoPath = context
-				.getProperty(Constants.GF_MODULE_REPOSITORIES);
-
-		createGFObrRepository(gfModuleRepoPath);
-
-		// Register ObrHandlerServiceFactory into OSGi Registry
-		registration = context.registerService(
-				SubsystemManagerService.class.getName(),
-				new SubsystemManagerServiceFactory(), null);
+	@Override
+	public Object getService(Bundle bundle, ServiceRegistration registration) {
+		return new SubsystemManagerServiceImpl(bundle.getBundleContext());
 	}
 
-	public void stop(BundleContext context) throws Exception {
-		if (registration != null) {
-			registration.unregister();
-			registration = null;
-		}
-	}
-
-	private void createGFObrRepository(String repositoryUris) {
-		if (repositoryUris != null) {
-			for (String s : repositoryUris.split("\\s")) {
-				URI repoURI = URI.create(s);
-				SubsystemManagerService obrHandler = new SubsystemManagerServiceImpl(
-						bctx);
-				try {
-					obrHandler.addRepository(repoURI);
-				} catch (Exception e) {
-					e.printStackTrace();
-					logger.logp(
-							Level.SEVERE,
-							"ObrBuilderActivator",
-							"createGFObrRepository",
-							"Creating Glassfish OBR Repository failed, RepoURI: {0}",
-							new Object[] { repoURI });
-				}
-			}
-		}
+	@Override
+	public void ungetService(Bundle bundle, ServiceRegistration registration,
+			Object service) {
 	}
 }
