@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2010-2013 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2013 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -41,21 +41,20 @@ package org.glassfish.featureManage.featureAdd;
 
 import com.sun.enterprise.config.serverbeans.*;
 
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-
 import java.io.File;
+
 import org.glassfish.api.I18n;
 import org.glassfish.api.Param;
 import org.glassfish.api.admin.*;
 import org.glassfish.hk2.api.PerLookup;
-import org.glassfish.obrbuilder.ObrHandlerService;
-
 import org.jvnet.hk2.annotations.Service;
+
+import org.glassfish.subsystem.manager.core.SubsystemManagerService;
 
 /**
  *
  * @author Jeremy Lv
+ * @author Tang Yong
  */
 @Service(name = "feature-add")
 @I18n("feature.add")
@@ -75,10 +74,8 @@ public class FeatureAdd implements AdminCommand {
     @Override
     public void execute(AdminCommandContext context) {
         try {
-            ObrHandlerService service = Util.getObrHandlerService();
-            InputStream is = new BufferedInputStream(path.toURI().toURL().openStream());
-            service.deploySubsystems(is);
-            is.close();
+        	SubsystemManagerService service = Util.getObrHandlerService();
+            service.deploySubsystems(path.getCanonicalPath());
         } catch (Exception e) {
             e.printStackTrace();
         }
