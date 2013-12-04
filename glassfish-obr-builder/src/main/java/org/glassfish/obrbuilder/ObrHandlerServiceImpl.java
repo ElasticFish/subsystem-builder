@@ -46,6 +46,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.net.MalformedURLException;
@@ -58,6 +59,7 @@ import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -83,6 +85,8 @@ import org.apache.felix.bundlerepository.impl.RepositoryImpl;
 import org.apache.felix.bundlerepository.impl.RequirementImpl;
 import org.apache.felix.bundlerepository.impl.ResourceImpl;
 import org.apache.felix.utils.log.Logger;
+import org.glassfish.obrbuilder.subsystem.Module;
+import org.glassfish.obrbuilder.subsystem.Subsystem;
 import org.glassfish.obrbuilder.subsystem.Subsystems;
 import org.jvnet.hk2.annotations.Optional;
 import org.jvnet.hk2.annotations.Service;
@@ -888,8 +892,7 @@ class ObrHandlerServiceImpl implements ObrHandlerService {
 
 	@Override
 	public Subsystems deploySubsystems(String subSystemDefFile) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		return deploySubsystems(subSystemDefFile, null);
 	}
 
 	@Override
