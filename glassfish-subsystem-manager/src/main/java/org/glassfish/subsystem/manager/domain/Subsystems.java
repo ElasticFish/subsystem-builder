@@ -45,7 +45,7 @@
 // Generated on: 2013.02.01 at 11:07:36 AM JST 
 //
 
-package org.glassfish.obrbuilder.subsystem;
+package org.glassfish.subsystem.manager.domain;
 
 import java.util.ArrayList;
 import java.util.List;

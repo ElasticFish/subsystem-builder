@@ -38,7 +38,7 @@
  * holder.
  */
 
-package org.glassfish.obrbuilder;
+package org.glassfish.subsystem.manager.core;
 
 /**
  * Most of the class is based on org.jvnet.hk2.osgiadapter.Constants which is written by

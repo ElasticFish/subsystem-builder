@@ -38,7 +38,7 @@
  * holder.
  */
 
-package org.glassfish.obrbuilder.subsystem;
+package org.glassfish.subsystem.manager.domain;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

@@ -38,9 +38,9 @@
  * holder.
  */
 
-package org.glassfish.obrbuilder;
+package org.glassfish.subsystem.manager.core;
 
-import static org.glassfish.obrbuilder.Logger.logger;
+import static org.glassfish.subsystem.manager.core.Logger.logger;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -86,10 +86,10 @@ import org.apache.felix.bundlerepository.impl.RepositoryImpl;
 import org.apache.felix.bundlerepository.impl.RequirementImpl;
 import org.apache.felix.bundlerepository.impl.ResourceImpl;
 import org.apache.felix.utils.log.Logger;
-import org.glassfish.obrbuilder.subsystem.Module;
-import org.glassfish.obrbuilder.subsystem.Subsystem;
-import org.glassfish.obrbuilder.subsystem.SubsystemXmlReaderWriter;
-import org.glassfish.obrbuilder.subsystem.Subsystems;
+import org.glassfish.subsystem.manager.domain.Module;
+import org.glassfish.subsystem.manager.domain.Subsystem;
+import org.glassfish.subsystem.manager.domain.SubsystemXmlReaderWriter;
+import org.glassfish.subsystem.manager.domain.Subsystems;
 import org.jvnet.hk2.annotations.Optional;
 import org.jvnet.hk2.annotations.Service;
 import org.osgi.framework.Bundle;
@@ -103,7 +103,7 @@ import org.osgi.framework.Version;
  * @author Sanjeeb.Sahoo@Sun.COM
  * @author TangYong(tangyong@cn.fujitsu.com)
  */
-class ObrHandlerServiceImpl implements ObrHandlerService {
+class SubsystemManagerServiceImpl implements SubsystemManagerService {
 
 	// We maintain our own repository list which we use during resolution
 	// process.
@@ -118,7 +118,7 @@ class ObrHandlerServiceImpl implements ObrHandlerService {
 
 	private SubsystemXmlReaderWriter subsystemParser = null;
 
-	public ObrHandlerServiceImpl(BundleContext context) {
+	public SubsystemManagerServiceImpl(BundleContext context) {
 		this.context = context;
 
 		subsystemParser = new SubsystemXmlReaderWriter();
@@ -958,7 +958,7 @@ class ObrHandlerServiceImpl implements ObrHandlerService {
 			}
 
 			// creating user-defined obr defined subsystems definition file
-			List<org.glassfish.obrbuilder.subsystem.Repository> repos = subsystems
+			List<org.glassfish.subsystem.manager.domain.Repository> repos = subsystems
 					.getRepository();
 			Map<File, Repository> repoMap = createUserDefinedRepos(
 					subsystems.getName(), repos);
@@ -1027,10 +1027,10 @@ class ObrHandlerServiceImpl implements ObrHandlerService {
 	}
 
 	private Map<File, Repository> createUserDefinedRepos(String subsystemsName,
-			List<org.glassfish.obrbuilder.subsystem.Repository> repos)
+			List<org.glassfish.subsystem.manager.domain.Repository> repos)
 			throws IOException {
 		Map<File, Repository> repoMap = new HashMap<File, Repository>();
-		for (org.glassfish.obrbuilder.subsystem.Repository repo : repos) {
+		for (org.glassfish.subsystem.manager.domain.Repository repo : repos) {
 			String repoName = repo.getName();
 			String repoPath = repo.getUri();
 			File repoFile = getSubSystemRepositoryFile(subsystemsName, repoName);

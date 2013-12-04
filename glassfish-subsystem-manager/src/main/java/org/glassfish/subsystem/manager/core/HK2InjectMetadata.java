@@ -37,15 +37,26 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-
-
-package org.glassfish.obrbuilder;
+package org.glassfish.subsystem.manager.core;
 
 /**
- * @author Sanjeeb.Sahoo@Sun.COM
+ * @author TangYong(tangyong@cn.fujitsu.com)
  */
-public class Logger {
-    public static final java.util.logging.Logger logger =
-            java.util.logging.Logger.getLogger(
-                    Logger.class.getPackage().getName());
+public class HK2InjectMetadata {
+	private String injectionFieldClassName;
+	private boolean isOptional; //@Optional
+	
+	public HK2InjectMetadata(String injectionFieldClassName, boolean isOptional){
+		this.injectionFieldClassName = injectionFieldClassName;
+		this.isOptional = isOptional;
+	}
+	
+	public String getInjectionFieldClassName(){
+		return injectionFieldClassName;
+	}
+	
+	public boolean getOptional(){
+		return isOptional;
+	}
+
 }

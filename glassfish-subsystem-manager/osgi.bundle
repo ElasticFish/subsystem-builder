@@ -51,6 +51,6 @@ Private-Package: \
                          org.apache.felix.bundlerepository*, \
                          org.apache.felix.utils*, \
                          org.apache.felix.bundlerepository.impl*, \
-                         org.glassfish.obrbuilder.*
-Bundle-Activator: org.glassfish.obrbuilder.ObrBuilderActivator
+                         org.glassfish.subsystem.manager.core.*
+Bundle-Activator: org.glassfish.subsystem.manager.core.SubsystemManagerActivator
 

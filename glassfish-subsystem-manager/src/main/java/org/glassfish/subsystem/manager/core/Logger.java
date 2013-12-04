@@ -38,58 +38,14 @@
  * holder.
  */
 
-package org.glassfish.obrbuilder;
 
-import java.net.URI;
-import java.util.logging.Level;
-
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
-
-import static org.glassfish.obrbuilder.Logger.logger;
+package org.glassfish.subsystem.manager.core;
 
 /**
- * @author TangYong(tangyong@cn.fujitsu.com)
+ * @author Sanjeeb.Sahoo@Sun.COM
  */
-public class ObrBuilderActivator implements BundleActivator {
-
-	private BundleContext bctx;
-	ServiceRegistration registration = null;
-
-	public void start(BundleContext context) throws Exception {
-		this.bctx = context;
-
-		String gfModuleRepoPath = context
-				.getProperty(Constants.GF_MODULE_REPOSITORIES);
-
-		createGFObrRepository(gfModuleRepoPath);
-		//createGFObrRepository(gfModuleRepoPath + Constants.OBR_TEST_REPO);
-	}
-
-	public void stop(BundleContext context) throws Exception {
-		if (registration != null) {
-			registration.unregister();
-		}
-	}
-
-	private void createGFObrRepository(String repositoryUris) {
-		if (repositoryUris != null) {
-			for (String s : repositoryUris.split("\\s")) {
-				URI repoURI = URI.create(s);
-				ObrHandlerService obrHandler = new ObrHandlerServiceImpl(bctx);
-				try {
-					obrHandler.addRepository(repoURI);
-				} catch (Exception e) {
-					e.printStackTrace();
-					logger.logp(
-							Level.SEVERE,
-							"ObrBuilderActivator",
-							"createGFObrRepository",
-							"Creating Glassfish OBR Repository failed, RepoURI: {0}",
-							new Object[] { repoURI });
-				}
-			}
-		}
-	}
+public class Logger {
+    public static final java.util.logging.Logger logger =
+            java.util.logging.Logger.getLogger(
+                    Logger.class.getPackage().getName());
 }

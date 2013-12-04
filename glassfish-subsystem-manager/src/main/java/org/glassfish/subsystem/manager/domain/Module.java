@@ -38,7 +38,7 @@
  * holder.
  */
 
-package org.glassfish.obrbuilder.subsystem;
+package org.glassfish.subsystem.manager.domain;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -56,7 +56,10 @@ import javax.xml.bind.annotation.XmlValue;
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="uri" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="version" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="start" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="description" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="startlevel" type="{http://www.w3.org/2001/XMLSchema}byte" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>
@@ -68,14 +71,20 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlType(name = "", propOrder = {
     "value"
 })
-public class Repository {
+public class Module {
 
     @XmlValue
     protected String value;
     @XmlAttribute(name = "name", required = true)
     protected String name;
-    @XmlAttribute(name = "uri")
-    protected String uri;
+    @XmlAttribute(name = "version")
+    protected String version;
+    @XmlAttribute(name = "start")
+    protected String start;
+    @XmlAttribute(name = "description")
+    protected String description;
+    @XmlAttribute(name = "startlevel")
+    protected Byte startlevel;
 
     /**
      * Gets the value of the value property.
@@ -126,27 +135,98 @@ public class Repository {
     }
 
     /**
-     * Gets the value of the uri property.
+     * Gets the value of the version property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getUri() {
-        return uri;
+    public String getVersion() {
+        return version;
     }
 
     /**
-     * Sets the value of the uri property.
+     * Sets the value of the version property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setUri(String value) {
-        this.uri = value;
+    public void setVersion(String value) {
+        this.version = value;
     }
 
+    /**
+     * Gets the value of the start property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getStart() {
+        return start;
+    }
+
+    /**
+     * Sets the value of the start property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setStart(String value) {
+        this.start = value;
+    }
+
+    /**
+     * Gets the value of the description property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Sets the value of the description property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDescription(String value) {
+        this.description = value;
+    }
+
+    /**
+     * Gets the value of the startlevel property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Byte }
+     *     
+     */
+    public Byte getStartlevel() {
+        return startlevel;
+    }
+
+    /**
+     * Sets the value of the startlevel property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Byte }
+     *     
+     */
+    public void setStartlevel(Byte value) {
+        this.startlevel = value;
+    }
 }

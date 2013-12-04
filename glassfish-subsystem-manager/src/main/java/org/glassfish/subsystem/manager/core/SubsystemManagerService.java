@@ -37,20 +37,20 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package org.glassfish.obrbuilder;
+package org.glassfish.subsystem.manager.core;
 
 import java.io.IOException;
 import java.net.URI;
 
 import org.apache.felix.bundlerepository.RepositoryAdmin;
-import org.glassfish.obrbuilder.subsystem.Subsystems;
+import org.glassfish.subsystem.manager.domain.Subsystems;
 
 /**
  * 
  * @author TangYong(tangyong@cn.fujitsu.com)
  */
 
-public interface ObrHandlerService {
+public interface SubsystemManagerService {
 
 	public RepositoryAdmin getRepositoryAdmin();
 

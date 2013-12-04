@@ -37,7 +37,7 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package org.glassfish.obrbuilder;
+package org.glassfish.subsystem.manager.core;
 
 import java.util.ArrayList;
 import java.util.List;
