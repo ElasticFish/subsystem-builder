@@ -887,7 +887,14 @@ class ObrHandlerServiceImpl implements ObrHandlerService {
 	}
 
 	@Override
-	public Subsystems deploySubsystems(String subSystemPath) throws IOException {
+	public Subsystems deploySubsystems(String subSystemDefFile) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Subsystems deploySubsystems(String subSystemDefFile,
+			String subSystemName) throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
