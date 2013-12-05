@@ -126,7 +126,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 
 	@Override
 	public RepositoryAdmin getRepositoryAdmin() {
-		Logger logger = new Logger(null);
+		Logger logger = new Logger(context);
 		if (repoAdmin == null) {
 			repoAdmin = new RepositoryAdminImpl(context, logger);
 			repositories.add(repoAdmin.getSystemRepository());
