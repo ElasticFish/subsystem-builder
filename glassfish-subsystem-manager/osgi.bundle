@@ -38,7 +38,7 @@
 # holder.
 #
 
--exportcontents: !*
+Export-Package: org.glassfish.subsystem.manager.core 
 Import-Package: \
                         !org.apache.felix.bundlerepository.impl.wrapper, \
                         !org.osgi.service.obr, \
@@ -51,6 +51,6 @@ Private-Package: \
                          org.apache.felix.bundlerepository*, \
                          org.apache.felix.utils*, \
                          org.apache.felix.bundlerepository.impl*, \
-                         org.glassfish.subsystem.manager.core.*
+                         org.glassfish.subsystem.manager.domain
 Bundle-Activator: org.glassfish.subsystem.manager.core.SubsystemManagerActivator
 

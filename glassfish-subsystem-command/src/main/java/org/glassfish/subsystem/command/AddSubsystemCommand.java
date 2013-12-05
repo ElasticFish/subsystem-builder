@@ -63,9 +63,12 @@ import org.glassfish.subsystem.manager.core.SubsystemManagerService;
 @RestEndpoints({ @RestEndpoint(configBean = Domain.class, opType = RestEndpoint.OpType.POST, path = "add-subsystem", description = "Subsystem Add") })
 public class AddSubsystemCommand implements AdminCommand {
 
-	@Param(primary = true, optional = true)
+	@Param(optional = true)
 	File path = null;
 
+	@Param(primary = true)
+	String name = null;
+	
 	@Override
 	public void execute(AdminCommandContext context) {
 		try {
