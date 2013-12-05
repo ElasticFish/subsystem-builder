@@ -86,9 +86,9 @@ public class AddSubsystemCommand implements AdminCommand {
 							"default subsystem def file for GF is not set");
 				}
 
-				service.deploySubsystems(defaultPath);
+				service.deploySubsystems(defaultPath, name);
 			} else {
-				service.deploySubsystems(path.getCanonicalPath());
+				service.deploySubsystems(path.getCanonicalPath(), name);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
