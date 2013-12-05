@@ -82,10 +82,10 @@ public class SubsystemManagerActivator implements BundleActivator {
 		if (repositoryUris != null) {
 			for (String s : repositoryUris.split("\\s")) {
 				URI repoURI = URI.create(s);
-				SubsystemManagerService obrHandler = new SubsystemManagerServiceImpl(
+				SubsystemManagerService subsystemManagerService = new SubsystemManagerServiceImpl(
 						bctx);
 				try {
-					obrHandler.addRepository(repoURI);
+					subsystemManagerService.addRepository(repoURI);
 				} catch (Exception e) {
 					e.printStackTrace();
 					logger.logp(
