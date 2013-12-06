@@ -1,7 +1,18 @@
 <subsystems name="Test" description="It is only used to to test">
 
-    <subsystem name="test1" description="test1">
+    <subsystem name="WebProfile" description="Java EE 7 Web Profile Subsystem">
         <module name="org.glassfish.main.web.core" />
+        <module name="org.glassfish.main.web.cli" />
+        <module name="org.glassfish.main.web.embed-api" />
+        <module name="org.glassfish.main.web.glue" />
+        <module name="org.glassfish.main.security.websecurity" />
+        <module name="org.glassfish.main.web.sse" />        
+    </subsystem>
+    
+    <subsystem name="ACC" description="Java EE ACC Subsystem">
+        <module name="org.glassfish.main.security.appclient.security" />
+        <module name="org.glassfish.main.appclient.server.appclient-connector" />
+        <module name="org.glassfish.main.appclient.server.appclient-server-core" />       
     </subsystem>
 
 </subsystems>
