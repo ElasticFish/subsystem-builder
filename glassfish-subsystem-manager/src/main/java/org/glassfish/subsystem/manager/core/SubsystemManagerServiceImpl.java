@@ -195,7 +195,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 			long t = System.currentTimeMillis();
 			updateRepository(repoFile, repoDir);
 			long t2 = System.currentTimeMillis();
-			logger.logp(Level.INFO, "ObrHandlerServiceImpl",
+			logger.logp(Level.INFO, "SubsystemManagerServiceImpl",
 					"_setupRepository",
 					"Thread #{0}: updateRepository took {1} ms", new Object[] {
 							tid, t2 - t });
@@ -219,7 +219,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 			repoFile.createNewFile();
 			createRepository(repoFile, repoDir);
 			long t2 = System.currentTimeMillis();
-			logger.logp(Level.INFO, "ObrHandlerServiceImpl",
+			logger.logp(Level.INFO, "SubsystemManagerServiceImpl",
 					"_setupRepository",
 					"Thread #{0}: createRepository took {1} ms", new Object[] {
 							tid, t2 - t });
@@ -371,13 +371,13 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 					try {
 						clazz = cls.loadClass(className);
 					} catch (ClassNotFoundException ex) {
-						logger.logp(Level.WARNING, "ObrHandlerServiceImpl",
+						logger.logp(Level.WARNING, "SubsystemManagerServiceImpl",
 								"scanHK2Annotations",
 								"Loading Class: {0} from Bundle: {1} failed.",
 								new Object[] { className, bundleSymbolicName });
 						continue;
 					} catch (NoClassDefFoundError ex1) {
-						logger.logp(Level.WARNING, "ObrHandlerServiceImpl",
+						logger.logp(Level.WARNING, "SubsystemManagerServiceImpl",
 								"scanHK2Annotations",
 								"Loading Class: {0} from Bundle: {1} failed.",
 								new Object[] { className, bundleSymbolicName });
@@ -512,7 +512,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 				throw new IOException("Failed to delete "
 						+ repoFile.getAbsolutePath());
 			}
-			logger.logp(Level.INFO, "ObrHandlerServiceImpl",
+			logger.logp(Level.INFO, "SubsystemManagerServiceImpl",
 					"updateRepository", "Recreating {0}",
 					new Object[] { repoFile });
 
@@ -736,7 +736,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 		// now compare timestamp of each jar and take a sum of size of all jars.
 		for (File jar : findAllJars(repoDir)) {
 			if (jar.lastModified() > lastModifiedTime) {
-				logger.logp(Level.INFO, "ObrHandlerServiceImpl",
+				logger.logp(Level.INFO, "SubsystemManagerServiceImpl",
 						"isObsoleteRepo", "{0} is newer than {1}",
 						new Object[] { jar, repoFile });
 				return true;
@@ -750,7 +750,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 			totalSize -= r.getSize();
 		}
 		if (totalSize != 0) {
-			logger.logp(Level.INFO, "ObrHandlerServiceImpl", "isObsoleteRepo",
+			logger.logp(Level.INFO, "SubsystemManagerServiceImpl", "isObsoleteRepo",
 					"Change in size detected by {0} bytes",
 					new Object[] { totalSize });
 			return true;
@@ -777,7 +777,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 	private boolean resolve(final Resolver resolver, Resource resource) {
 		resolver.add(resource);
 		boolean resolved = resolver.resolve();
-		logger.logp(Level.INFO, "ObrHandlerServiceImpl", "resolve",
+		logger.logp(Level.INFO, "SubsystemManagerServiceImpl", "resolve",
 				"At the end of first pass, resolver outcome is \n: {0}",
 				new Object[] { getResolverOutput(resolver) });
 
@@ -805,7 +805,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 		if (repositoryAdmin == null) {
 			logger.logp(
 					Level.WARNING,
-					"ObrHandlerServiceImpl",
+					"SubsystemManagerServiceImpl",
 					"findResource",
 					"OBR is not yet available, so can't find resource with name = {0} and version = {1} from repository",
 					new Object[] { name, version });
@@ -818,7 +818,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 			Resource[] resources = discoverResources(query);
 			logger.logp(
 					Level.INFO,
-					"ObrHandlerServiceImpl",
+					"SubsystemManagerServiceImpl",
 					"findResource",
 					"Using the first one from the list of {0} discovered bundles shown below: {1}",
 					new Object[] { resources.length, Arrays.toString(resources) });
@@ -904,7 +904,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 		if (!file.exists()) {
 			logger.logp(
 					Level.SEVERE,
-					"ObrHandlerServiceImpl",
+					"SubsystemManagerServiceImpl",
 					"deploySubsystems",
 					"{0} is not exist, and please check your subsystems definition file!",
 					new Object[] { subSystemDefFile });
@@ -944,7 +944,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 				if (subsystem == null) {
 					logger.logp(
 							Level.SEVERE,
-							"ObrHandlerServiceImpl",
+							"SubsystemManagerServiceImpl",
 							"deploySubsystems",
 							"{0} is not exist, and please check your inputted subsystem name!",
 							new Object[] { subSystemName });
@@ -983,7 +983,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 						// 2) throw exception and breaking subsystem deploy
 						logger.logp(
 								Level.SEVERE,
-								"ObrHandlerServiceImpl",
+								"SubsystemManagerServiceImpl",
 								"deploySubsystems",
 								"No module or bundle matching name = {0} and version = {1} ",
 								new Object[] { module.getName(),
@@ -1004,7 +1004,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 				saveSubsystemsDef(subsystems);
 			}
 		} catch (Exception e) {
-			logger.logp(Level.SEVERE, "ObrHandlerServiceImpl",
+			logger.logp(Level.SEVERE, "SubsystemManagerServiceImpl",
 					"deploySubsystems",
 					"Subsystems deployed failed, failed error msg={0}",
 					new Object[] { e.getMessage() });
@@ -1062,7 +1062,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 				Resource r = dmh.createResource(jar.toURI().toURL());
 
 				if (r == null) {
-					logger.logp(Level.WARNING, "ObrHandlerServiceImpl",
+					logger.logp(Level.WARNING, "SubsystemManagerServiceImpl",
 							"createRepository", "{0} not an OSGi bundle", jar
 									.toURI().toURL());
 				} else {
@@ -1071,7 +1071,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 			}
 			Repository repository = dmh.repository(resources
 					.toArray(new Resource[resources.size()]));
-			logger.logp(Level.INFO, "ObrHandlerServiceImpl", "createRepository",
+			logger.logp(Level.INFO, "SubsystemManagerServiceImpl", "createRepository",
 					"Created {0} containing {1} resources.", new Object[] {
 							repoFile, resources.size() });
 			if (repoFile != null && save) {
@@ -1131,7 +1131,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 	private synchronized Bundle deploy(String name, String version) {
 		Resource resource = findResource(name, version);
 		if (resource == null) {
-			logger.logp(Level.INFO, "ObrHandlerServiceImpl", "deploy",
+			logger.logp(Level.INFO, "SubsystemManagerServiceImpl", "deploy",
 					"No resource matching name = {0} and version = {1} ",
 					new Object[] { name, version });
 			return null;
@@ -1153,7 +1153,7 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 			return getBundle(resource);
 		} else {
 			Reason[] reqs = resolver.getUnsatisfiedRequirements();
-			logger.logp(Level.WARNING, "ObrHandlerServiceImpl", "deploy",
+			logger.logp(Level.WARNING, "SubsystemManagerServiceImpl", "deploy",
 					"Unable to satisfy the requirements: {0}",
 					new Object[] { Arrays.toString(reqs) });
 			return null;
