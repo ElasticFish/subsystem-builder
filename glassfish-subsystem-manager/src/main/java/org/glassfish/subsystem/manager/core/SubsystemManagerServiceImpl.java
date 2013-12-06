@@ -81,6 +81,7 @@ import org.apache.felix.bundlerepository.RepositoryAdmin;
 import org.apache.felix.bundlerepository.Resolver;
 import org.apache.felix.bundlerepository.Resource;
 import org.apache.felix.bundlerepository.impl.CapabilityImpl;
+import org.apache.felix.bundlerepository.impl.LocalRepositoryImpl;
 import org.apache.felix.bundlerepository.impl.RepositoryAdminImpl;
 import org.apache.felix.bundlerepository.impl.RepositoryImpl;
 import org.apache.felix.bundlerepository.impl.RequirementImpl;
@@ -117,18 +118,21 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 	private RepositoryAdmin repoAdmin;
 
 	private SubsystemXmlReaderWriter subsystemParser = null;
+	
+	private Logger obrLogger;
 
 	public SubsystemManagerServiceImpl(BundleContext context) {
 		this.context = context;
+		
+		obrLogger = new Logger(context);
 
 		subsystemParser = new SubsystemXmlReaderWriter();
 	}
 
 	@Override
 	public RepositoryAdmin getRepositoryAdmin() {
-		Logger logger = new Logger(context);
 		if (repoAdmin == null) {
-			repoAdmin = new RepositoryAdminImpl(context, logger);
+			repoAdmin = new RepositoryAdminImpl(context, obrLogger);
 			repositories.add(repoAdmin.getSystemRepository());
 		}
 
@@ -931,6 +935,10 @@ class SubsystemManagerServiceImpl implements SubsystemManagerService {
 			Repository systemRepo = loadRepository(systemOBRFile);
 			// We add system obr repo into repositories
 			repositories.add(systemRepo);
+			
+			//[TangYong]2013.12.06
+			//fixing https://github.com/ElasticFish/subsystem-builder/issues/20
+			repositories.add(new LocalRepositoryImpl(context, obrLogger));
 
 			// Secondly, we create user-defined obr defined subsystem definition
 			// file and we need to select right subsystem name passed by
