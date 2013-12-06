@@ -256,6 +256,13 @@ public class ResolverImpl implements Resolver
                 {
                     continue;
                 }
+                
+                //[TangYong]2013.12.6 
+                //fixing https://github.com/ElasticFish/subsystem-builder/issues/17
+                if ("(&(symbolicname=system.bundle))".equalsIgnoreCase(reqs[reqIdx].getFilter())){
+                	continue;
+                }
+                
                 candidate = searchResources(reqs[reqIdx], m_addedSet);
                 if (candidate == null)
                 {
